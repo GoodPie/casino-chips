@@ -1,0 +1,21 @@
+@import "src/_variables.scss";
+
+#wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+#banner-wrapper {
+  background: $accent;
+  h1 {
+    font-size: 7em;
+    width: 50%;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+}
+
+#login-wrapper {
+  background: $primary-darker;
+}

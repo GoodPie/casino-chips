@@ -1,0 +1,40 @@
+@import '~@angular/material/theming';
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$app-primary: mat-palette($mat-gray);
+$app-accent:  mat-palette($mat-amber);
+$app-warn: mat-palette($mat-purple);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);
+
+// Export theme colors
+$primary: mat-color($app-primary);
+$primary-darker: mat-color($app-primary, darker);
+$primary-lighter: mat-color($app-primary, lighter);
+$accent: mat-color($app-accent);
+$accent-darker: mat-color($app-accent, darker);
+$accent-lighter: mat-color($app-accent, lighter);
+$warn: mat-color($app-warn);
+
+$blue-gray: mat-color(mat-palette($mat-blue-grey));
+$purple: mat-color(mat-palette($mat-purple));
+$pink: mat-color(mat-palette($mat-pink));
+$yellow: mat-color(mat-palette($mat-yellow));
+$brown: mat-color(mat-palette($mat-brown));
+$cyan: mat-color(mat-palette($mat-cyan));
+$blue: mat-color(mat-palette($mat-blue));
+$deep-purple: mat-color(mat-palette($mat-deep-purple));
+$deep-orange: mat-color(mat-palette($mat-deep-orange));

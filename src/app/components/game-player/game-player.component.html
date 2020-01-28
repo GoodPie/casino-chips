@@ -1,0 +1,16 @@
+<div class="wrapper">
+
+  <div class="username {{ randomColorClass }}" style="background-color: random-color({{randomColor}})">
+    {{ username }}
+  </div>
+  <div class="user-details">
+    <span class="current-chips">{{ currentBet }} / {{ currentChips }}</span>
+    <span>Total Chips: {{ currentChips }}</span>
+    <span>Chips Won: {{ chipsWon }}</span>
+    <span>Chips Lost: {{ chipsLost }}</span>
+  </div>
+  <button mat-button mat-flat-button class="win-button">
+    Player Has Won
+  </button>
+
+</div>

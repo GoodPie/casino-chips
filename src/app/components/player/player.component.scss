@@ -1,0 +1,84 @@
+@import "src/variables";
+
+#wrapper {
+  height: 100%;
+  background: $primary-darker;
+}
+
+#player-wrapper {
+  width: 35%;
+  background: $primary;
+}
+
+#player-wrapper, #betting-wrapper, #betting-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+#username {
+  color: white;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+#player-wrapper {
+  align-items: center;
+}
+
+#betting-wrapper {
+  width: 90%;
+}
+
+#betting-wrapper button {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 10px 0;
+  font-size: 1.2em;
+}
+
+#betting-buttons button {
+  background: $accent-darker;
+  padding: 10px 0;
+  margin-bottom: 5px;
+  margin-top: 0;
+  width: 100%;
+}
+
+#current-bid {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 2em;
+  color: white;
+  font-weight: lighter;
+}
+
+
+
+@media (max-width: 1100px) {
+  #player-wrapper {
+    width: 60%;
+  }
+
+  #betting-wrapper button {
+    padding: 15px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  #player-wrapper {
+    width: 90%;
+  }
+
+  #betting-wrapper button {
+    padding: 20px 0;
+  }
+
+
+}
+
+
+

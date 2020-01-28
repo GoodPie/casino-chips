@@ -1,0 +1,10 @@
+<div id="wrapper" class="flex-center">
+  <div id="pool">
+    {{ currentPool }}
+    <br/>
+    <span class="small-text">Current Pool</span>
+  </div>
+  <div *ngFor="let item of [].constructor(10); let i = index;">
+    <app-game-player></app-game-player>
+  </div>
+</div>

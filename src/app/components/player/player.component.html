@@ -1,0 +1,27 @@
+<div class="flex-center" id="wrapper">
+
+
+  <div id="player-wrapper">
+    <div class="{{ backgroundColor }}" id="username">
+      {{ username }}
+    </div>
+    <div id="betting-wrapper">
+      <!-- Current Bids Displayed To User -->
+      <span id="current-bid">{{ currentBid }} / {{ totalChips }}</span>
+
+      <!-- Buttons used for modifying bid -->
+      <div id="betting-buttons">
+        <button mat-flat-button>+1</button>
+        <button mat-flat-button>+5</button>
+        <button mat-flat-button>+10</button>
+        <button mat-flat-button>+25</button>
+        <button mat-flat-button>+100</button>
+        <button mat-flat-button class="bg-accent">All In</button>
+        <button mat-flat-button class="bg-accent">Clear</button>
+      </div>
+
+      <!-- Button to actually place bid -->
+      <button mat-flat-button class="bg-blue-gray">Place Bid</button>
+    </div>
+  </div>
+</div>

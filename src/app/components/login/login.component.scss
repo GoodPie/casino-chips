@@ -1,0 +1,38 @@
+@import "src/_variables.scss";
+
+input {
+  color: white;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+h2 {
+  font-weight: lighter;
+  color: $primary;
+  align-self: start;
+}
+
+button {
+  margin-bottom: 5px;
+}
+
+span {
+  text-align: center   ;
+}
+
+span a{
+  color: $primary;
+}
