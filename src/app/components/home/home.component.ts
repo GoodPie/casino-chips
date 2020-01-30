@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthProvider} from 'ngx-auth-firebaseui';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {AuthService} from '../../services/core/auth.service';
 
 
 @Component({
@@ -8,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public providers: AuthProvider;
+
+  constructor(public afAuth: AuthService) { }
 
   ngOnInit() {
   }

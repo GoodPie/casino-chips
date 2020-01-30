@@ -8,11 +8,15 @@ import {environment} from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule} from '@angular/material';
 import { GameComponent } from './components/game/game.component';
 import {RouterModule, Routes} from '@angular/router';
 import { GamePlayerComponent } from './components/game-player/game-player.component';
 import { PlayerComponent } from './components/player/player.component';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { GameListComponent } from './components/game-list/game-list.component';
 
 const appRoutes: Routes = [
   { path: 'play', component: PlayerComponent },
@@ -27,23 +31,28 @@ const appRoutes: Routes = [
     LoginComponent,
     GameComponent,
     GamePlayerComponent,
-    PlayerComponent
+    PlayerComponent,
+    GameListComponent
   ],
-    imports: [
-        RouterModule.forRoot(
-            appRoutes,
-            {enableTracing: true} // <-- debugging purposes only
-        ),
-        BrowserModule,
-        NgbModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        BrowserAnimationsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatIconModule,
-    ],
+  imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      {enableTracing: true} // <-- debugging purposes only
+    ),
+    BrowserModule,
+    NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    NgxAuthFirebaseUIModule.forRoot(environment.firebase),
+    MatListModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
