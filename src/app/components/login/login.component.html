@@ -1,7 +1,5 @@
 <div class="wrapper">
-
-
-  <form id="register-wrapper" class="auth-form" [hidden]="!isRegistering">
+  <div id="register-wrapper" class="auth-form" [hidden]="!isRegistering">
     <h2>Register</h2>
 
     <mat-form-field>
@@ -27,9 +25,9 @@
     <button mat-button mat-flat-button>Register with Google</button>
     <button mat-button mat-flat-button>Register with Facebook</button>
     <span>Already have an account? <a href="#" (click)="toggleAuthForm()">Login </a></span>
-  </form>
+  </div>
 
-  <form id="login-wrapper" class="auth-form" [hidden]="isRegistering">
+  <div id="login-wrapper" class="auth-form" [hidden]="isRegistering">
     <h2>Login</h2>
 
     <mat-form-field>
@@ -41,9 +39,9 @@
     </mat-form-field>
     <br/>
 
-    <button mat-button mat-flat-button>Login</button>
+    <button mat-button mat-flat-button type="button">Login</button>
     <button mat-button mat-flat-button (click)="signInWithGoogle()" type="button">Login with Google</button>
-    <button mat-button mat-flat-button>Login with Facebook</button>
+    <button mat-button mat-flat-button  type="button">Login with Facebook</button>
     <span>Need an account? <a href="#" (click)="toggleAuthForm()">Register</a></span>
-  </form>
+  </div>
 </div>

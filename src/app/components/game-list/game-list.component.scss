@@ -1,0 +1,12 @@
+@import "src/styles";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: $primary;
+}
+

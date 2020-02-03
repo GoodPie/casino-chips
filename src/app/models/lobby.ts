@@ -1,17 +1,22 @@
 import {Player} from './player';
+import {User} from 'firebase';
 
 export class Lobby {
+  constructor(
+    public id: string,
+    public creator: User,
+    public members: Player[],
+    public password?: string
+  ) {}
 
-  public id: string;
-  public creator: Player;
-  public members: Player[];
-  public password: string;
-
-  constructor(id, creator, password = null) {
-    this.id = id;
-    this.creator = creator;
-    this.password = password;
-    this.members = [creator];
+  public ToFirebaseObject() {
+    return {
+      id: this.id,
+      creator: this.creator,
+      members: this.members,
+      password: this.password
+    };
   }
 
 }
+

@@ -13,12 +13,12 @@ export class AuthService {
 
   public authState: Observable<User>;
 
-  constructor(private afAuth: AngularFireAuth, private afFirestore: AngularFirestore, private router: Router) {
+  constructor(public afAuth: AngularFireAuth, private afFirestore: AngularFirestore, private router: Router) {
     this.authState = afAuth.authState;
   }
 
   public signInWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).catch(err => console.log(err));
   }
 
   public signOut() {

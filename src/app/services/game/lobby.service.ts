@@ -3,6 +3,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Lobby} from '../../models/lobby';
 import {AuthService} from '../core/auth.service';
 import {HelperService} from '../core/helper.service';
+import {combineLatest, merge} from 'rxjs';
+import {map, mapTo} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,24 +19,23 @@ export class LobbyService {
 
     let lobbyCreated = false;
 
-    while (!lobbyCreated) {
-      // Generate a random room key
-      const roomKey = Math.random().toString(36).substring(2, 5) +
-        Math.random().toString(36).substring(2, 5);
+    // Generate a random room key
+    const roomKey = Math.random().toString(36).substring(2, 5) +
+      Math.random().toString(36).substring(2, 5);
 
-      // Check if the room key already exists
-      this.afFireStore.doc<Lobby>(`${this.LOBBY_PATH}/${roomKey}`).snapshotChanges()
-        .subscribe(documentChangeAction => {
-          const dataExists = documentChangeAction.payload.exists;
-          if (dataExists === false) {
+    const roomRef = this.afFireStore.doc<Lobby>(`${this.LOBBY_PATH}/${roomKey}`).snapshotChanges();
+    combineLatest(roomRef, this.authService.authState)
+      .subscribe(([roomChangeAction, user]) => {
+        const roomExists = roomChangeAction.payload.exists;
+        if (roomExists === false)  {
+          const newLobby = new Lobby(roomKey, user, []);
+          // tslint:disable-next-line:max-line-length
+          this.afFireStore.collection<Lobby>(this.LOBBY_PATH).doc(roomKey).set(newLobby.ToFirebaseObject()).then(() => alert('Created new lobby: ' + roomKey));
+        } else {
+          lobbyCreated = true;
+        }
+       });
 
-            const newLobby = new Lobby()
-            documentChangeAction.payload.ref.set(null);
-
-            lobbyCreated = true;
-          }
-        });
-    }
 
 
 
