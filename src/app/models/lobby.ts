@@ -1,22 +1,42 @@
-import {Player} from './player';
+import {IPlayer, Player} from './player';
 import {User} from 'firebase';
 
 export class Lobby {
   constructor(
     public id: string,
-    public creator: User,
+    public creator: Player,
     public members: Player[],
     public password?: string
   ) {}
 
-  public ToFirebaseObject() {
-    return {
-      id: this.id,
-      creator: this.creator,
-      members: this.members,
-      password: this.password
+  public static ToFirebaseObject(lobby: Lobby) {
+
+    const creatorObj = Player.ToFirebaseObject(lobby.creator);
+    const iMembers: IPlayer[] = [];
+    if (lobby.members) {
+      for (let i = 0; i < lobby.members.length; i++) {
+        iMembers[i] = Player.ToFirebaseObject(lobby.members[i]);
+      }
+    }
+
+    const lobbyInterface = {
+      id: lobby.id,
+      creator: creatorObj,
+      members: iMembers,
+      password: lobby.password ? lobby.password : ''
     };
+
+    return lobbyInterface;
   }
+
+}
+
+export interface ILobby {
+
+  id: string;
+  player: IPlayer;
+  members: IPlayer[];
+  password: string;
 
 }
 

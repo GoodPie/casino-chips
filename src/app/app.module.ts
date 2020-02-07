@@ -17,8 +17,10 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { GameListComponent } from './components/game-list/game-list.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const appRoutes: Routes = [
+  { path: 'logout', component: LogoutComponent},
   { path: 'play', component: PlayerComponent },
   { path: 'game', component: GameComponent },
   { path: '', component: HomeComponent }
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     GameComponent,
     GamePlayerComponent,
     PlayerComponent,
-    GameListComponent
+    GameListComponent,
+    LogoutComponent
   ],
   imports: [
     RouterModule.forRoot(

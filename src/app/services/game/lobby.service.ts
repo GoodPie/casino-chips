@@ -24,13 +24,13 @@ export class LobbyService {
       Math.random().toString(36).substring(2, 5);
 
     const roomRef = this.afFireStore.doc<Lobby>(`${this.LOBBY_PATH}/${roomKey}`).snapshotChanges();
-    combineLatest(roomRef, this.authService.authState)
-      .subscribe(([roomChangeAction, user]) => {
+    combineLatest(roomRef, this.authService.loggedInPlayer)
+      .subscribe(([roomChangeAction, player]) => {
         const roomExists = roomChangeAction.payload.exists;
         if (roomExists === false)  {
-          const newLobby = new Lobby(roomKey, user, []);
+          const newLobby = new Lobby(roomKey, player, []);
           // tslint:disable-next-line:max-line-length
-          this.afFireStore.collection<Lobby>(this.LOBBY_PATH).doc(roomKey).set(newLobby.ToFirebaseObject()).then(() => alert('Created new lobby: ' + roomKey));
+          this.afFireStore.collection<Lobby>(this.LOBBY_PATH).doc(roomKey).set(Lobby.ToFirebaseObject(newLobby)).then(() => alert('Created new lobby: ' + roomKey));
         } else {
           lobbyCreated = true;
         }

@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {FirebaseAuth} from '@angular/fire';
 import {Observable} from 'rxjs';
 import {auth, User} from 'firebase';
+import {Player} from '../../models/player';
+import {PlayerService} from './player.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,17 @@ import {auth, User} from 'firebase';
 export class AuthService {
 
   public authState: Observable<User>;
+  public loggedInPlayer: Observable<Player>;
 
-  constructor(public afAuth: AngularFireAuth, private afFirestore: AngularFirestore, private router: Router) {
+  constructor(public afAuth: AngularFireAuth, private playerService: PlayerService, private router: Router) {
     this.authState = afAuth.authState;
+    this.authState.subscribe(user => {
+      playerService.createUser(user, user.displayName)
+        .catch(err => console.log(err))
+        .then(() => {
+          this.loggedInPlayer = this.playerService.getPlayerById(user.uid);
+        });
+    });
   }
 
   public signInWithGoogle() {
@@ -22,6 +32,6 @@ export class AuthService {
   }
 
   public signOut() {
-    this.afAuth.auth.signOut();
+    return this.afAuth.auth.signOut();
   }
 }
