@@ -1,10 +1,7 @@
 
-<div class="wrapper">
-  <mat-action-list>
-    <button mat-list-item>Game 01 - Hosted by GoodPie</button>
-    <button mat-list-item>Game 01 - Hosted by GoodPie</button>
-    <button mat-list-item>Game 01 - Hosted by GoodPie</button>
-    <button mat-list-item>Game 01 - Hosted by GoodPie</button>
+<div class="wrapper" *ngIf="(lobbyList | async) as lobbies">
+  <mat-action-list >
+    <button mat-list-item *ngFor="let lobby of lobbies" (click)="goToLobby(lobby.id)">{{ lobby.creator.username }}'s Game</button>
   </mat-action-list>
 
   <button mat-button class="bg-accent" (click)="createLobby()" type="button">Create Game</button>

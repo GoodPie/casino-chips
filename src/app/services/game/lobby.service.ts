@@ -3,7 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Lobby} from '../../models/lobby';
 import {AuthService} from '../core/auth.service';
 import {HelperService} from '../core/helper.service';
-import {combineLatest, merge} from 'rxjs';
+import {combineLatest, merge, Observable} from 'rxjs';
 import {map, mapTo} from 'rxjs/operators';
 
 @Injectable({
@@ -13,11 +13,9 @@ export class LobbyService {
 
   private LOBBY_PATH = 'lobby';
 
-  constructor(private afFireStore: AngularFirestore, private authService: AuthService, private helpers: HelperService) { }
+  constructor(private afFireStore: AngularFirestore, private authService: AuthService) { }
 
   public createLobby() {
-
-    let lobbyCreated = false;
 
     // Generate a random room key
     const roomKey = Math.random().toString(36).substring(2, 5) +
@@ -29,16 +27,25 @@ export class LobbyService {
         const roomExists = roomChangeAction.payload.exists;
         if (roomExists === false)  {
           const newLobby = new Lobby(roomKey, player, []);
-          // tslint:disable-next-line:max-line-length
-          this.afFireStore.collection<Lobby>(this.LOBBY_PATH).doc(roomKey).set(Lobby.ToFirebaseObject(newLobby)).then(() => alert('Created new lobby: ' + roomKey));
+
+          // Create the lobby in Firebase
+          this.afFireStore.collection<Lobby>(this.LOBBY_PATH).doc(roomKey).set(Lobby.ToFirebaseObject(newLobby))
+            .then(() => alert('Created new lobby: ' + roomKey))
+            .catch((error) => console.error(`Failed to create a lobby: ${error}`));
         } else {
-          lobbyCreated = true;
+          // Try again with a new random ID and hope that we don't hit the recursion limit :)
+          this.createLobby();
         }
        });
+  }
 
 
+  public GetLobby(roomKey: string) {
+    return this.afFireStore.doc<Lobby>(`${this.LOBBY_PATH}/${roomKey}`).snapshotChanges();
+  }
 
-
+  public GetAllLobbies(): Observable<Lobby[]> {
+    return this.afFireStore.collection<Lobby>(`${this.LOBBY_PATH}`).valueChanges();
   }
 
 }

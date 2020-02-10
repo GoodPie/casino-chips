@@ -18,11 +18,15 @@ import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore'
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { GameListComponent } from './components/game-list/game-list.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import {Player} from './models/player';
+import { NoLobbyFoundComponent } from './components/no-lobby-found/no-lobby-found.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 const appRoutes: Routes = [
   { path: 'logout', component: LogoutComponent},
+  { path: 'play/:id', component: PlayerComponent },
   { path: 'play', component: PlayerComponent },
-  { path: 'game', component: GameComponent },
+  { path: 'game/:id', component: GameComponent },
   { path: '', component: HomeComponent }
 ];
 
@@ -35,7 +39,9 @@ const appRoutes: Routes = [
     GamePlayerComponent,
     PlayerComponent,
     GameListComponent,
-    LogoutComponent
+    LogoutComponent,
+    NoLobbyFoundComponent,
+    LoadingComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -55,6 +61,9 @@ const appRoutes: Routes = [
     MatIconModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase),
     MatListModule,
+  ],
+  entryComponents: [
+    NoLobbyFoundComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

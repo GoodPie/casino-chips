@@ -1,13 +1,16 @@
+<div [hidden]="loadingLobby === false && loadingPlayer === false">
+  <app-loading></app-loading>
+</div>
+
 <div class="flex-center" id="wrapper">
 
-
-  <div id="player-wrapper">
-    <div class="{{ backgroundColor }}" id="username">
-      {{ username }}
+  <div id="player-wrapper" *ngIf="currentPlayer">
+    <div class="{{ currentPlayer.bannerColor }}" id="username">
+      {{ currentPlayer.username }}
     </div>
     <div id="betting-wrapper">
       <!-- Current Bids Displayed To User -->
-      <span id="current-bid">{{ currentBid }} / {{ totalChips }}</span>
+      <span id="current-bid">0 / {{ currentPlayer.chips }}</span>
 
       <!-- Buttons used for modifying bid -->
       <div id="betting-buttons">

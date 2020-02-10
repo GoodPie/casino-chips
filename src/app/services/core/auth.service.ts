@@ -34,4 +34,13 @@ export class AuthService {
   public signOut() {
     return this.afAuth.auth.signOut();
   }
+
+  getSignedInPlayer(): Promise<Observable<Player>> {
+
+    return new Promise((resolve) => {
+      this.afAuth.authState.subscribe(user => {
+        resolve(this.playerService.getPlayerById(user.uid));
+      });
+    });
+  }
 }
